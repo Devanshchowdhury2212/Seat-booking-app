@@ -29,7 +29,7 @@ const Seats = () => {
     setSuccess("");
 
     try {
-      const token = localStorage.getItem("accessToken");
+      // const token = localStorage.getItem("accessToken");
 
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/seats/reserve`,
