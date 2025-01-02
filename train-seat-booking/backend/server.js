@@ -101,7 +101,8 @@ app.post("/auth/login",async(req,res)=>{
         const accessToken = jwt.encode({userId:data.id},jwtSecretKey)
         const options = {
             httpOnly:true,
-            secure:true
+            secure:true,
+            maxAge: 3600000, 
         }
         
         const {data:loginUser,error:loginUserError} = await supabaseClient
