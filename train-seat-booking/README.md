@@ -1,40 +1,142 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Train Seat Booking System
 
-## Getting Started
+This is a full-stack train seat booking system developed using **Next.js**, **Node.js**, and **PostgreSQL**, with **Supabase** as the database layer. The application allows users to book train seats, handles authentication with JWT, and ensures responsiveness across devices.
 
-First, run the development server:
+---
 
+## Features
+
+- User Authentication: Signup and login with secure JWT-based sessions.
+- Train Seat Booking: Reserve up to 7 seats at a time with priority for booking seats in the same row.
+- Responsive Design: Mobile and desktop-friendly UI built with Next.js.
+- Backend: RESTful APIs for user authentication and seat booking.
+- Database: PostgreSQL with Supabase for data storage and retrieval.
+- Input Validation: Secure and sanitized user input.
+
+---
+
+## Tech Stack
+
+- **Frontend**: Next.js
+- **Backend**: Node.js, Express.js
+- **Database**: PostgreSQL (via Supabase)
+- **Authentication**: JWT stored in HTTP-only cookies
+- **Deployment**: Vercel for frontend and Supabase backend (can be hosted elsewhere if needed)
+
+---
+
+## Setup Instructions
+
+### Prerequisites
+
+1. Node.js (v16+ recommended)
+2. Supabase account with a configured database
+3. PostgreSQL (if not using Supabase)
+4. Environment variables for JWT and Supabase keys
+
+---
+
+### Backend Setup
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/train-seat-booking.git
+   cd train-seat-booking/backend
+2. Install dependencies:
+    ```bash
+    npm install
+3. Set up environment variables: Create a .env file in the backend folder and add:
+    env file
+    ```bash
+    JWT_SECRET=your_jwt_secret_key
+    SUPABASE_URL=your_supabase_url
+    SUPABASE_ANON_KEY=your_supabase_anon_key
+    SUPABASE_SERVICE_KEY=your_supabase_service_key
+    PORT=5000
+4. Run the backend server:
+    ```bash
+    npm start
+
+The backend will run on http://localhost:5000.
+
+### Frontend Setup
+1. Navigate to the frontend folder:
+    ```bash
+    cd ../frontend
+    npm install
+
+2. Configure environment variables: Create a .env.local file in the frontend folder:
+    ```bash
+    NEXT_PUBLIC_API_URL=http://localhost:5000
+    npm run dev
+
+### SupaBase DB Setup
+
+1. Users:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+CREATE TABLE users (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  username TEXT UNIQUE NOT NULL,
+  password TEXT NOT NULL,
+  email TEXT UNIQUE NOT NULL
+);
+```
+2. Seats:
+```bash
+Copy code
+CREATE TABLE seats (
+  id SERIAL PRIMARY KEY,
+  row_number INT NOT NULL,
+  seat_number INT NOT NULL,
+  is_booked BOOLEAN DEFAULT FALSE,
+  user_id UUID REFERENCES users(id)
+);
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Endpoints
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### 1. User Authentication
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+#### Signup
+- **Endpoint**: `POST /auth/signup`
+- **Description**: Creates a new user account.
+- **Request Body**:
+  ```json
+  {
+    "username": "testuser",
+    "password": "password123",
+    "email": "testuser@example.com"
+  }
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+### **POST** `/auth/login`
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+#### Description:
+Logs in an existing user and provides a JWT token stored in an HTTP-only cookie. This token can be used for subsequent authenticated requests.
 
-## Learn More
+#### Request Body:
+The request body should contain the following fields:
 
-To learn more about Next.js, take a look at the following resources:
+```json
+{
+  "username": "testuser",
+  "password": "password123"
+}   
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+### 2. Book Seats
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Endpoint**: `POST /seats/book`
+- **Method**: `POST`
+- **Description**: Allows users to book specific seats. The user must be authenticated via JWT token.
 
-## Deploy on Vercel
+- **Request Headers**:
+  - **Authorization**: `Bearer <JWT_TOKEN>` (The user must be logged in)
+  
+- **Request Body**:
+  - An array of seat IDs the user wants to book.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+    ```json
+    {
+      "seatIds": [1, 2, 3]
+    }
+    ```
