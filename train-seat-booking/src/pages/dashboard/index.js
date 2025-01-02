@@ -29,17 +29,18 @@ const Seats = () => {
     setSuccess("");
 
     try {
-      // const token = localStorage.getItem("accessToken");
+      const token = localStorage.getItem("accessToken");
 
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/seats/reserve`,
         { numberOfSeats: numSeatsToBook },
         {
           withCredentials: true,
-          headers: { accessToken: token },
+          headers: { Authorization: `Bearer ${token}` },
+          // headers: { accessToken: token },
         }
       );
-
+      
       if (response.status === 200) {
         setRecentlyBookedSeats(response.data.seats); // Seats successfully reserved
         setSuccess("Seats booked successfully!");
