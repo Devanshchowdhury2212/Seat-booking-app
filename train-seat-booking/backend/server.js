@@ -11,7 +11,8 @@ import cookieParser from "cookie-parser"
 
 const app = express()
 app.use(cors({
-    origin:'http://localhost:3000',
+    origin:"https://seat-booking-app-1-frontend.onrender.com",// 'http://localhost:3000',
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials:true
 }))
 app.use(express.json({limit:"16kb"}))
