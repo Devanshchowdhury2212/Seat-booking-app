@@ -32,7 +32,7 @@ const Seats = () => {
       const token = localStorage.getItem("accessToken");
 
       const response = await axios.post(
-        "http://localhost:5000/seats/reserve",
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/seats/reserve`,
         { numberOfSeats: numSeatsToBook },
         {
           withCredentials: true,

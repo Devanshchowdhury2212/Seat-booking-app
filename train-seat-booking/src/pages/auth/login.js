@@ -14,7 +14,7 @@ export default function LoginPage() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/auth/login", // Update with your backend endpoint
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`, 
         { username, password },
         { withCredentials: true } // Ensures cookies are sent
       );
