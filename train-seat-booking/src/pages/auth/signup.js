@@ -47,10 +47,15 @@ const Signup = () => {
       }, 3000);
 
     } catch (error) {
-      if (error.response && error.response.data.error.includes("duplicate key value")) {
-        setError('Username already exists. Please choose a different one.');
+      console.log(error)
+      if (error.response && error.response.data && error.response.data.error) {
+        if (error.response.data.error.includes("duplicate key value")) {
+          setError('Username already exists. Please choose a different one.');
+        } else {
+          setError(error.response.data.error); // Display other backend errors
+        }
       } else {
-        setError('An error occurred during signup. Please try again later.');
+        setError("An unexpected error occurred. Please try again."); // Handle unexpected errors
       }
     }
   };

@@ -16,7 +16,7 @@ const Seats = () => {
 
   const fetchSeats = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/seats");
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/seats`);
       setSeats(response.data.sort((a, b) => a.id - b.id)); // Ensure seats are sorted by ID
     } catch {
       setError("Failed to load seats.");
@@ -45,6 +45,7 @@ const Seats = () => {
         setSuccess("Seats booked successfully!");
         fetchSeats(); // Refresh the seat data after booking
       } else {
+        
         setError("Error booking seats. Please try again.");
       }
     } catch (err) {
