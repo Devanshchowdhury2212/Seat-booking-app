@@ -1,0 +1,224 @@
+/* General Container Styling */
+.seatsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 15px;
+  max-width: 900px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #f3f4f8, #e1e2e6);
+  overflow: hidden;
+}
+
+/* Title Styling */
+.title {
+  font-size: 2.2rem;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  font-weight: 600;
+}
+
+/* Seat Grid Styling */
+.seatGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 seats per row */
+  gap: 15px;
+  margin: 30px 0;
+  transition: grid-template-columns 0.3s ease;
+}
+
+.seat {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.3s, box-shadow 0.3s ease;
+}
+
+/* Available Seats (Green) */
+.seat.available {
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 123, 0, 0.2);
+}
+
+.seat.available:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+.seat.reserved {
+  background-color: #ffc107;
+  color: white;
+  cursor: not-allowed;
+  box-shadow: 0 4px 6px rgba(255, 193, 7, 0.3);
+}
+
+.seat.booked {
+  background-color: #007bff;
+  color: white;
+  cursor: not-allowed;
+  box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3);
+}
+
+.seat.booked:hover {
+  background-color: #0069d9;
+}
+
+/* Info and Actions Section */
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+/* Input Styling */
+.input {
+  width: 220px;
+  padding: 12px;
+  font-size: 1.1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  text-align: center;
+  transition: border-color 0.3s ease;
+}
+
+.input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+/* Button Styling */
+.button {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s ease;
+}
+
+.button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  color: #666;
+}
+
+/* Booked Seats Info */
+.bookedSeatsInfo {
+  margin-top: 20px;
+  font-size: 1.1rem;
+  color: #007bff;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Error and Success Messages */
+.error {
+  color: red;
+  font-size: 1rem;
+  margin-top: 10px;
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+
+.success {
+  color: green;
+  font-size: 1rem;
+  margin-top: 10px;
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .seatGrid {
+    grid-template-columns: repeat(4, 1fr); /* Adjust to 4 seats per row on smaller screens */
+    gap: 12px;
+  }
+
+  .seat {
+    width: 50px;
+    height: 50px;
+    font-size: 1rem;
+  }
+
+  .input {
+    width: 180px;
+  }
+
+  .button {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+}
+
+/* Recently Booked Seats Section */
+.recentlyBooked {
+  margin-top: 30px;
+  width: 100%;
+  text-align: center;
+}
+
+.recentlyBookedList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.recentlyBookedSeat {
+  background-color: #4caf50;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 15px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.recentlyBookedSeat:hover {
+  background-color: #45a049;
+}
+
+/* Loading Spinner */
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

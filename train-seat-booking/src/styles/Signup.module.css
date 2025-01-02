@@ -1,0 +1,68 @@
+/* styles/Signup.module.css */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f7f6;
+  }
+ /* styles.module.css */
+.heading {
+  margin: 0;  /* Remove any default margins */
+  padding: 0;  /* Remove any default padding */
+  font-size: 2rem;  /* Adjust size */
+  font-weight: 600;  /* Make it bold */
+  text-align: center;  /* Center it */
+  color: #333;  /* Set a good text color */
+  line-height: 1.4;  /* Set line height */
+  letter-spacing: 1px;  /* Optional: Adjust letter spacing for better readability */
+}
+
+  
+  .form {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+  
+  .input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+  }
+  
+  .button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #0056b3;
+  }
+  
+  .error {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 1rem;
+  }
+  
