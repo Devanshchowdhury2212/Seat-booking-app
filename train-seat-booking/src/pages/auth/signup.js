@@ -37,7 +37,7 @@ const Signup = () => {
         username,
         email,
         password,
-      },{withCredentials: 'include'});
+      },{withCredentials: true});
       setSuccessMessage(response.data.message);
       setError('');  // Clear any previous error messages
 
