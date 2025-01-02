@@ -62,8 +62,8 @@ app.post("/auth/signup",async(req,res) => {
         },jwtSecretKey)
         const options = {
             httpOnly:true,
-            sameSite: 'Strict',
-            secure:true
+            secure:true,
+            maxAge: 3600000, 
         }
        
         return res
