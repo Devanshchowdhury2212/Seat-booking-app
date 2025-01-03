@@ -140,11 +140,11 @@ app.get('/seats',async(req,res)=>{
 
 app.post('/seats/reserve', async (req, res) => {
     const { numberOfSeats } = req.body;
-    const accessToken = req.cookies?.accessToken 
+    const token = req.cookies?.accessToken 
     const jwtSecretKey = process.env.JWT_SECRET;
-    console.log("Cookie",req.cookies,"xxxx",accessToken,"yy",jwtSecretKey)
+    console.log("Cookie",req.cookies,"xxxx",token,"yy",jwtSecretKey)
     try {
-        const decoded = await jwt.decode(accessToken, jwtSecretKey);
+        const decoded = await jwt.decode(token, jwtSecretKey);
         console.log(decoded)
         if (!decoded?.userId) {
             return res.status(400).json({ error: 'Unauthorized access' });
