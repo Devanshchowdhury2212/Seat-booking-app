@@ -142,7 +142,7 @@ app.post('/seats/reserve', async (req, res) => {
     const { numberOfSeats } = req.body;
     const accessToken = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "");
     const jwtSecretKey = process.env.JWT_SECRET;
-
+    
     try {
         const decoded = jwt.decode(accessToken, jwtSecretKey);
         if (!decoded?.userId) {
