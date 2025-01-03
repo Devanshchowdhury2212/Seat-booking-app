@@ -55,7 +55,7 @@ app.post("/auth/signup",async(req,res) => {
 
         const jwtSecretKey = process.env.JWT_SECRET
         
-        const accessToken = jwt.encode({
+        const accessToken = await jwt.encode({
             userId:newUserEntry[0].id,
             username:newUserEntry[0].username,
             email:newUserEntry[0].email
@@ -98,7 +98,7 @@ app.post("/auth/login",async(req,res)=>{
         }
         const jwtSecretKey = process.env.JWT_SECRET
         
-        const accessToken = jwt.encode({userId:data.id},jwtSecretKey)
+        const accessToken = await jwt.encode({userId:data.id},jwtSecretKey)
         const options = {
             httpOnly:true,
             secure:true,
@@ -142,9 +142,10 @@ app.post('/seats/reserve', async (req, res) => {
     const { numberOfSeats } = req.body;
     const accessToken = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "");
     const jwtSecretKey = process.env.JWT_SECRET;
-    
+    console.log(accessToken,jwtSecretKey)
     try {
-        const decoded = jwt.decode(accessToken, jwtSecretKey);
+        const decoded = await jwt.decode(accessToken, jwtSecretKey);
+        console.log(decoded)
         if (!decoded?.userId) {
             return res.status(400).json({ error: 'Unauthorized access' });
         }
