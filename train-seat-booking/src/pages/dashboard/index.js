@@ -36,7 +36,8 @@ const Seats = () => {
         {
           withCredentials: true,
           // headers: { Authorization: `Bearer ${token}` },
-          // headers: { accessToken: token },
+          headers: {"Content-Type":"application/json"},
+
         }
       );
       

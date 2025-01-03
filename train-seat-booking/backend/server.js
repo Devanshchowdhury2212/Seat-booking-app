@@ -11,7 +11,7 @@ import cookieParser from "cookie-parser"
 
 const app = express()
 app.use(cors({
-    origin: ["https://seat-booking-app-1-frontend.onrender.com",'http://localhost:3000',],// 'http://localhost:3000',
+    origin: ["https://seat-booking-app-1-frontend.onrender.com"],// 'http://localhost:3000',
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials:true
 }))
@@ -140,9 +140,9 @@ app.get('/seats',async(req,res)=>{
 
 app.post('/seats/reserve', async (req, res) => {
     const { numberOfSeats } = req.body;
-    const accessToken = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "");
+    const accessToken = req.cookies?.accessToken 
     const jwtSecretKey = process.env.JWT_SECRET;
-    console.log(accessToken,jwtSecretKey)
+    console.log("Cookie",req.cookies,"xxxx",accessToken,"yy",jwtSecretKey)
     try {
         const decoded = await jwt.decode(accessToken, jwtSecretKey);
         console.log(decoded)
